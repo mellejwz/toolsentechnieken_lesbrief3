@@ -53,7 +53,9 @@ puts
 choice = gets.chomp
 #
 if choice == 'show contacts' || choice == 'show'
+	puts
 	show_contacts
 elsif choice == 'add contact' || choice == 'add'
+	puts
 	add_contact
 end
