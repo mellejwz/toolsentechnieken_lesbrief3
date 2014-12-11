@@ -1,15 +1,14 @@
 #use ruby-mysql
 require 'Mysql'
-
+#set the connection
+connection = Mysql.connect(
+	'127.0.0.1',
+	'root',
+	'',
+	'addressbook'
+)
 #show contacts
-def show_contacts()
-	#set the connection
-	connection = Mysql.connect(
-		'127.0.0.1',
-		'root',
-		'',
-		'addressbook'
-		)
+def show_contacts(connection)
 	#save the select query in a variable
 	contacts = connection.query 'SELECT Naam, Achternaam, Email, Nummer FROM contacts'
 	#show the results of the query
@@ -17,16 +16,8 @@ def show_contacts()
 		puts (naam + ' ' + achternaam).ljust(20, '.') + email.ljust(40, '.') + nummer.rjust(0)
 	end
 end
-
 #add contact
-def add_contact()
-	#set the connection
-	connection = Mysql.connect(
-		'127.0.0.1',
-		'root',
-		'',
-		'addressbook'
-		)
+def add_contact(connection)
 	#ask for contact details and save those in variables
 	puts 'Please input the name of the contact'
 	name = gets.chomp
@@ -54,8 +45,8 @@ choice = gets.chomp
 #
 if choice == 'show contacts' || choice == 'show'
 	puts
-	show_contacts
+	show_contacts(connection)
 elsif choice == 'add contact' || choice == 'add'
 	puts
-	add_contact
+	add_contact(connection)
 end
